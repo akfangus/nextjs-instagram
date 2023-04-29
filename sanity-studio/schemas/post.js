@@ -1,1 +1,57 @@
-export default {}
+export default {
+  title: 'Post',
+  name: 'post',
+  type: 'document',
+  fields: [
+    {
+      title: 'Author',
+      name: 'author',
+      type: 'reference',
+      to: [{type: 'user'}],
+    },
+    {
+      title: 'Photo',
+      name: 'photo',
+      type: 'image',
+    },
+    {
+      title: 'Likes',
+      name: 'likes',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'user'}],
+        },
+      ],
+      validation: (Rule) => Rule.unique(),
+    },
+
+    //댓글스키마를 이안에 해버립니다. 분리해도됩니다.
+    {
+      title: 'Comments',
+      name: 'comments',
+      type: 'array',
+      of: [
+        {
+          title: 'Comment',
+          name: 'comment',
+          type: 'document',
+          fields: [
+            {
+              title: 'Author',
+              name: 'author',
+              type: 'reference',
+              to: [{type: 'user'}],
+            },
+            {
+              title: 'Comment',
+              name: 'comment',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}

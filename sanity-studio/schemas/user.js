@@ -21,7 +21,7 @@ export default {
     {
       title: 'Image',
       name: 'image',
-      type: 'stting',
+      type: 'string',
     },
     //사용자가 follow하고있는 배열
     {
