@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import HomeIcon from "./ui/icons/HomeIcon";
 import HomeFillIcon from "./ui/icons/HomeFillIcon";
 import SearchIcon from "./ui/icons/SearchIcon";
@@ -30,7 +31,8 @@ const menu = [
 const Navbar = () => {
   //현제 url
   const pathName = usePathname();
-  console.log(pathName);
+  const { data: session } = useSession();
+
   return (
     <div className="flex justify-between items-center px-6">
       <Link href={"/"}>
@@ -45,7 +47,11 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
-          <ColorButton text="Sign In" onClick={() => {}} />
+          {session ? (
+            <ColorButton text="Sign out" onClick={() => signOut()} />
+          ) : (
+            <ColorButton text="Sign in" onClick={() => signIn()} />
+          )}
         </ul>
       </nav>
     </div>
